@@ -1,52 +1,19 @@
 import { ICatalogRepository } from "../interface/catalogRepository.interface";
 
 export class CatalogService {
-  private _repository: ICatalogRepository;
 
-  constructor(repository: ICatalogRepository) {
-    this._repository = repository;
-  }
-
-  async createProduct(input: any) {
-    const data = await this._repository.create(input);
-    if (!data.id) {
-      throw new Error("unable to create product");
+    constructor(repository: ICatalogRepository){
+        
     }
-    return data;
-  }
 
-  async updateProduct(input: any) {
-    const data = await this._repository.update(input);
-    if (!data.id) {
-      throw new Error("unable to update product");
-    }
-    // emit event to update record in Elastic search
-    return data;
-  }
 
-  // instead of this we will get product from Elastic search
-  async getProducts(limit: number, offset: number) {
-    const products = await this._repository.find(limit, offset);
+    createProduct(input: any) {}
 
-    return products;
-  }
+    updateProduct(input: any) {}
 
-  async getProduct(id: number) {
-    const product = await this._repository.findOne(id);
-    return product;
-  }
+    getProducts(limit: number, offset: number) {}
 
-  async deleteProduct(id: number) {
-    const response = await this._repository.delete(id);
-    // delete record from Elastic search
-    return response;
-  }
+    getProduct(id: number) {}
 
-  async getProductStock(ids: number[]) {
-    const products = await this._repository.findStock(ids);
-    if (!products) {
-      throw new Error("unable to find product stock details");
-    }
-    return products;
-  }
+    deleteProduct(id: number) {}
 }
