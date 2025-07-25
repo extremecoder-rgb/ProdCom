@@ -1,9 +1,9 @@
 import { ICatalogRepository } from "../interface/catalogRepository.interface";
 
 export class CatalogService {
-
+    private _repository: ICatalogRepository;
     constructor(repository: ICatalogRepository){
-        
+        this._repository = repository;
     }
 
 
