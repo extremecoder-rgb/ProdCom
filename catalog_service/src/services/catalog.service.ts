@@ -9,9 +9,13 @@ export class CatalogService {
 
     async createProduct(input: any) {
        const data = await this._repository.create(input);
-       return data;
-    }
-
+       if(!data.id){
+            throw new Error("Unable to create product");
+        }
+        return data;
+       }
+       
+    
     updateProduct(input: any) {}
 
     getProducts(limit: number, offset: number) {}

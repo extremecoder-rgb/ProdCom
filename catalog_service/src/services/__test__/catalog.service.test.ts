@@ -2,6 +2,9 @@ import { ICatalogRepository } from "../../interface/catalogRepository.interface"
 import { MockCatalogRepository } from "../../repository/mockCatalog.repository";
 import { CatalogService } from "../catalog.service";
 import { faker } from '@faker-js/faker'
+import { Product } from "../../models/product.model";
+
+
 const mockProduct = (rest: any) => {
     return {
         name: faker.commerce.productName(),
@@ -41,7 +44,24 @@ describe("CatalogService", () => {
             });
          });
 
-        test("should throw an error when product creation fails", () => {});
+        test("should throw an error when product creation fails", async () => {
+            const service = new CatalogService(repository);
+            const reqBody = mockProduct({
+                price: +faker.commerce.price(),
+            });
+
+            jest
+                .spyOn(repository, "create")
+                .mockImplementationOnce(() => Promise.resolve({} as Product));
+
+
+
+            await expect(service.createProduct(reqBody)).rejects.toThrow(
+                "Unable to create product"
+            );
+        });
+
+       
     });
    
 });
