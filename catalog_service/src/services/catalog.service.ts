@@ -21,7 +21,10 @@ export class CatalogService {
         return data;
     }
 
-    getProducts(limit: number, offset: number) {}
+    async getProducts(limit: number, offset: number) {
+        const products = await this._repository.find(limit, offset);
+        return products
+    }
 
     getProduct(id: number) {}
 
