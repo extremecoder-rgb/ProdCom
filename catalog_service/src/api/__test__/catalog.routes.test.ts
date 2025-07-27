@@ -114,4 +114,55 @@ describe("Catalog Routes", () => {
             expect(response.body).toEqual("Unable to update product");
         });
     });
+
+
+    describe("GET /products?limit=0&&offset=0", () => {
+        test("should return a range of products based on limit and offset", async () => {
+
+            const randomLimit = faker.number.int({min: 10, max: 50});
+            const products = ProductFactory.buildList(randomLimit);
+
+
+
+            jest
+            .spyOn(catalogService, 'getProducts')
+            .mockImplementationOnce(() => Promise.resolve(products));
+            const response = await request(app)
+                .get(`/products?limit=${randomLimit}&offset=0`)
+                .set("Accept", "application/json");
+            console.log("TEST RESPONSE", response);
+            expect(response.status).toBe(200);
+            expect(response.body).toEqual(products);
+        });
+    });
+
+    describe("GET /products/:id", () => {
+        test("should return a product by id", async () => {
+            const product = ProductFactory.build();
+
+            jest
+            .spyOn(catalogService, "getProduct")
+            .mockImplementationOnce(() => Promise.resolve(product));
+            const response = await request(app)
+                .get(`/products/${product.id}`)
+                .set("Accept", "application/json");
+            expect(response.status).toBe(200);
+            expect(response.body).toEqual(product);
+        });
+    });
+
+    describe("DELETE /products/:id", () => {
+        test("should delete a product by id", async () => {
+            const product = ProductFactory.build();
+
+            jest
+            .spyOn(catalogService, "deleteProduct")
+            .mockImplementationOnce(() => Promise.resolve({ id: product.id}));
+            const response = await request(app)
+                .delete(`/products/${product.id}`)
+                .set("Accept", "application/json");
+            expect(response.status).toBe(200);
+            expect(response.body).toEqual({ id: product.id});
+        });
+    });
 })
