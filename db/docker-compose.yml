@@ -5,9 +5,6 @@ services:
     image: "postgres:14.0"
     ports:
       - "5432:5432"
-    deploy:
-      mode: replicated
-      replicas: 1
     environment:
       POSTGRES_USER: catalog_db
       POSTGRES_PASSWORD: catalog_db_password
