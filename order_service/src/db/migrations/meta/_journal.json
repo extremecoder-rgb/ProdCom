@@ -8,6 +8,13 @@
       "when": 1753804302894,
       "tag": "0000_plain_fantastic_four",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1753814060044,
+      "tag": "0001_eager_black_tarantula",
+      "breakpoints": true
     }
   ]
 }
