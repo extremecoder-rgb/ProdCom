@@ -4,7 +4,7 @@ import { CartWithLineItems } from "../dto/cartRequest.dto";
 import { NotFoundError } from "../utils";
 import { eq } from "drizzle-orm";
 
-// declare repository type
+
 export type CartRepositoryType = {
   createCart: (customerId: number, lineItem: CartLineItem) => Promise<number>;
   findCart: (id: number) => Promise<CartWithLineItems>;
