@@ -19,7 +19,8 @@ export class CreateProductRequest{
 export class updateProductRequest {
     name?: string;
     description?: string;
-    @Min(1)
     price?: number;
+
+    @IsNumber()
     stock?: number;
 }
